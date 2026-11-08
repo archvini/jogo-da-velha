@@ -1,0 +1,236 @@
+:root {
+  color-scheme: dark;
+  --text: #f1f5f9;
+  --muted: #9aabba;
+  --panel: #182736;
+  --line: #34495a;
+  --x: #7dd3fc;
+  --o: #f9a8d4;
+  --green: #4ade80;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  padding: 24px 16px;
+  color: var(--text);
+  font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+  background-color: #101b2c;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 31px, #b6d6d308 32px),
+    repeating-linear-gradient(90deg, transparent 0 31px, #b6d6d308 32px),
+    linear-gradient(130deg, #101b2c 4%, #10242e 60%, #12332f 100%);
+}
+
+main {
+  position: relative;
+  width: min(100%, 520px);
+  min-width: 0;
+  padding: 32px 20px 24px;
+  text-align: center;
+}
+
+main::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 58px;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, #38bdf8, #4ade80);
+  box-shadow: 0 0 18px #4ade8055;
+  content: "";
+  transform: translateX(-50%);
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 42px;
+  line-height: 1.12;
+}
+
+h1::before {
+  display: block;
+  margin-bottom: 10px;
+  color: #a7f3d0;
+  font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  content: "DESAFIO CLASSICO";
+}
+
+.placar {
+  display: inline-block;
+  margin: 6px 0 14px;
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #182736c9;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.placar b { padding: 0 4px; color: var(--text); }
+#px { color: var(--x); }
+#po { color: var(--o); }
+#pe { color: var(--green); }
+
+.modo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 4px auto 8px;
+  color: #c3d0d9;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#cpu {
+  position: relative;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 26px;
+  margin: 0;
+  appearance: none;
+  border: 1px solid #526474;
+  border-radius: 999px;
+  background: #344454;
+  cursor: pointer;
+  transition: background-color .2s, border-color .2s;
+}
+
+#cpu::before {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  content: "";
+  transition: transform .2s;
+}
+
+#cpu:checked {
+  border-color: #22c55e;
+  background: #15803d;
+}
+
+#cpu:checked::before {
+  background: #f0fdf4;
+  transform: translateX(20px);
+}
+
+#status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 1.5em;
+  margin: 12px 0 15px;
+  color: #dce8ee;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#status::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px #4ade8080;
+  content: "";
+}
+
+#tabuleiro {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: min(100%, 390px);
+  margin: 0 auto 20px;
+  padding: 12px;
+  border: 1px solid #405263;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #1a2a3a, #111e2a);
+  box-shadow: 0 18px 48px #02080d70, inset 0 1px #ffffff0a;
+}
+
+.celula {
+  aspect-ratio: 1;
+  min-width: 0;
+  border: 1.5px solid #34495a;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #213244, #1a2938);
+  color: var(--text);
+  font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .16s, border-color .16s, background .16s, box-shadow .16s;
+}
+
+.celula:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: #5c7a8a;
+  background: linear-gradient(145deg, #2a4052, #203447);
+  box-shadow: 0 8px 18px #02080d55;
+}
+
+.celula:disabled { cursor: default; }
+.celula.X { color: var(--x); text-shadow: 0 0 18px #38bdf866; }
+.celula.O { color: var(--o); text-shadow: 0 0 18px #f472b866; }
+
+.celula.venceu {
+  border-color: #4ade80;
+  background: linear-gradient(145deg, #1d704e, #14532d);
+  box-shadow: 0 0 22px #22c55e55, inset 0 1px #ffffff20;
+}
+
+#novo {
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid #86efac55;
+  border-radius: 9px;
+  background: linear-gradient(180deg, #4ade80, #16a34a);
+  box-shadow: 0 8px 22px #16a34a35, inset 0 1px #ffffff55;
+  color: #073b27;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .16s, box-shadow .16s, filter .16s;
+}
+
+#novo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 11px 26px #16a34a50, inset 0 1px #ffffff66;
+  filter: brightness(1.05);
+}
+
+button:focus-visible, #cpu:focus-visible {
+  outline: 3px solid #facc15;
+  outline-offset: 3px;
+}
+
+@media (max-width: 420px) {
+  main { padding: 24px 4px 18px; }
+  h1 { font-size: 36px; }
+  .placar { font-size: 13px; }
+  .modo { gap: 8px; font-size: 13px; }
+  #tabuleiro { gap: 8px; padding: 9px; border-radius: 16px; }
+  .celula { border-radius: 11px; font-size: 2.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}

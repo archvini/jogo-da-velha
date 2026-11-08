@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jogo da Velha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Jogo da Velha</h1>
+    <p class="placar">X: <b id="px">0</b> · O: <b id="po">0</b> · Empates: <b id="pe">0</b></p>
+    <label class="modo"><input type="checkbox" id="cpu" checked> Jogar contra o computador (ele é o O)</label>
+    <p id="status" aria-live="polite"></p>
+    <div id="tabuleiro"></div>
+    <button id="novo">Nova partida</button>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
